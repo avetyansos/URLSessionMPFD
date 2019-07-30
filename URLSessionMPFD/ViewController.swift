@@ -13,6 +13,8 @@ typealias Parameters = [String: String]
 class ViewController: UIViewController {
     
 
+    let imagesArray =  [UIImage]()
+    
     @IBAction func getRequest(_ sender: Any) {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
         var request = URLRequest(url: url)
@@ -47,8 +49,12 @@ class ViewController: UIViewController {
         
         let parameters = ["name": "MyTestFile123321",
                           "description": "My tutorial test file for MPFD uploads"]
-        
-        guard let mediaImage = Media(withImage: #imageLiteral(resourceName: "testImage"), forKey: "image") else { return }
+        var mediaImages = [Media]()
+        for image in imagesArray {
+            guard let mediaImage = Media(withImage: image, forKey: "image") else { return }
+            mediaImages.append(mediaImage)
+        }
+//        guard let mediaImage = Media(withImage: #imageLiteral(resourceName: "testImage"), forKey: "image") else { return }
         
         guard let url = URL(string: "https://api.imgur.com/3/image") else { return }
         var request = URLRequest(url: url)
@@ -59,7 +65,7 @@ class ViewController: UIViewController {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.addValue("Client-ID f65203f7020dddc", forHTTPHeaderField: "Authorization")
         
-        let dataBody = createDataBody(withParameters: parameters, media: [mediaImage], boundary: boundary)
+        let dataBody = createDataBody(withParameters: parameters, media: mediaImages, boundary: boundary)
         request.httpBody = dataBody
         
         let session = URLSession.shared

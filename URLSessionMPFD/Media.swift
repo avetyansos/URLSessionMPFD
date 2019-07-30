@@ -19,7 +19,7 @@ struct Media {
         self.mimeType = "image/jpeg"
         self.filename = "kyleleeheadiconimage234567.jpg"
         
-        guard let data = UIImageJPEGRepresentation(image, 0.7) else { return nil }
+        guard let data = image.jpegData(compressionQuality: 0.7) else { return nil }
         self.data = data
     }
     
