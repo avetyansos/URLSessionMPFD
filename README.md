@@ -6,7 +6,7 @@ Swift version - 5.0
 Network Provider - URLSessionDatatask
 
 
-Method that creates httpBpdy for any Request
+Method that creates httpBody for any Request
 
         func createDataBody(withParameters params: Parameters?, media: [Media]?, boundary: String) -> Data {
         
