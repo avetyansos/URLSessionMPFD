@@ -54,7 +54,6 @@ class ViewController: UIViewController {
             guard let mediaImage = Media(withImage: image, forKey: "image") else { return }
             mediaImages.append(mediaImage)
         }
-//        guard let mediaImage = Media(withImage: #imageLiteral(resourceName: "testImage"), forKey: "image") else { return }
         
         guard let url = URL(string: "https://api.imgur.com/3/image") else { return }
         var request = URLRequest(url: url)
